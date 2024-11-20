@@ -5,7 +5,7 @@ database_txt = "database/base.txt" #место постоянного хране
 if __name__ == "__main__":
 
     library = []  # Хранилище объектов Book
-    print("Добро пожаловать в библиотеку")
+    print("Добро пожаловать в библиотеку\n")
     library = functions.load_data(database_txt)
     while True:
         choice = input("\nВыберите следующее действие (для выбора нажмите соответствующую цифру и Enter):\n"

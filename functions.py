@@ -88,17 +88,22 @@ def write_data(filename: str, library: list) -> None:
 
 
 def load_data(filename: str) -> list:
-    '''загружает данные из внешнего хранилища. Если файла не существует то его создает'''
-    with open(filename, encoding="UTF-8") as f:
+        '''загружает данные из внешнего хранилища. Если файла не существует то его создает'''
         library = []
-        file = f.readlines()
-        if len(file) == 0:
+        try:
+            f = open(filename, mode="rt")
+        except FileNotFoundError:
+            print("Хранилище пустое")
             return library
         else:
-            for i in file:
-                result = i.split("~")
-                library.append(classes.Book(result[0], result[1], result[2], result[3].strip()))
+            file = f.readlines()
+            if len(file) == 0:
+                return library
+            else:
+                for i in file:
+                    result = i.split("~")
+                    library.append(classes.Book(result[0], result[1], result[2], result[3].strip()))
 
-    f.close()
-    print("данные загружны успешно")
-    return library
+        f.close()
+        print("данные загружены успешно")
+        return library
