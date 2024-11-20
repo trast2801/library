@@ -66,19 +66,25 @@ if __name__ == "__main__":
             break
         elif choice == "1":
             record = input("Введите через запятую следущую информацию:\n"
-                           "название книги, автор, год издания")
-            record = record.split()
+                           "название книги, автор, год издания\n")
+            record = record.split(",")
+            print(record)
             if len(record) < 3:
                 print("Ошибка - должно быть так: название книги, автор, год издания")
-                break
+
             title = record[0]
             author = record[1]
             god = record[2]
+            status = True
+            # ниже строки отладки - удалить
             name += 1
             title = "название" + str(name)
             author = "автор" + str(name)
             god = name
-            status = True
+
+            #
             library.append(Book(title, author, god, status))
+
+        elif choice == "4":
             for i in range(len(library)):
                 print(library[i].send_record_book(library[i].instance_count))
