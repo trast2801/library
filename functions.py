@@ -1,12 +1,16 @@
 import classes
 
 
-def add_book(library) -> list:
-    ''' Добавляет записи в хранилище'''
-    name = 0
+def input_data() -> str:
     record = input("Введите через запятую следущую информацию:\n"
                    "название книги, автор, год издания: \n")
     record = record.split(",")
+    return record
+
+def add_book(record, library: list) -> list:
+    ''' Добавляет записи в хранилище'''
+
+
     if len(record) < 3:
         print("\nОшибка - должно быть так: название книги, автор, год издания\n")
         return library
@@ -25,7 +29,7 @@ def add_book(library) -> list:
     return library
 
 
-def del_book(id: int, library) -> list:
+def del_book(id: int, library: list) -> list:
     ''' удаляет запись о книге по ID, если id не существует генерит исключение'''
     result_search = None
     try:
@@ -40,7 +44,7 @@ def del_book(id: int, library) -> list:
     return library
 
 
-def change_stat(id: int, library, status: str) -> list:
+def change_stat(id: int, library: list, status: str) -> list:
     ''' меняет статус в записи о книге по ID, если id не существует генерит исключение'''
     result_search = None
     try:
@@ -55,7 +59,7 @@ def change_stat(id: int, library, status: str) -> list:
     return library
 
 
-def find_book(str_for_search: str, library) -> list:
+def find_book(str_for_search: str, library: list) -> list:
     spisok = []  # результат поиска
     for i in range(len(library)):
         if str_for_search in library[i].send_record_book_wihtout_id(library[i].instance_count):
@@ -64,7 +68,7 @@ def find_book(str_for_search: str, library) -> list:
 
 
 def get_id() -> int:
-    '''функция проверяет id на соответстиве числу'''
+    '''функция проверяет id на соответствие числу'''
     ch = input("Введите номер ID:")
     if ch == None:
         print("Вы не ввели ID номер книги \n")
@@ -89,6 +93,7 @@ def write_data(filename: str, library: list) -> None:
 
 def load_data(filename: str) -> list:
     '''загружает данные из внешнего хранилища. Если файла не существует то его создает'''
+
     with open(filename, encoding="UTF-8") as f:
         library = []
         file = f.readlines()
@@ -100,5 +105,9 @@ def load_data(filename: str) -> list:
                 library.append(classes.Book(result[0], result[1], result[2], result[3].strip()))
 
     f.close()
-    print("данные загружны успешно")
+    print("данные загружены успешно")
     return library
+
+def list_all(library: list):
+    for i in range(len(library)):
+        print(library[i].send_record_book(library[i].instance_count))

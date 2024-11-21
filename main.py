@@ -1,24 +1,25 @@
 import functions
 
-database_txt = "database/base.txt" #место постоянного хранения данных
+DATABASE_TXT = "database/base.txt" #место постоянного хранения данных
 
 if __name__ == "__main__":
 
     library = []  # Хранилище объектов Book
     print("Добро пожаловать в библиотеку\n")
-    library = functions.load_data(database_txt)
+    library = functions.load_data(DATABASE_TXT)
     while True:
         choice = input("\nВыберите следующее действие (для выбора нажмите соответствующую цифру и Enter):\n"
                        "     1. Добавить книгу \n"
                        "     2. Удалить книгу \n"
                        "     3. Найти книгу\n"
-                       "     4. получить список всех книг\n"
+                       "     4. Получить список всех книг\n"
                        "     5. Изменить статус книги (в наличии или выдана)\n"
-                       "     6. Закончить работу \n")
+                       "     6. Закончить работу \n"
+                       "     7. Тестирование\n")
 
         if choice == "1":
-
-            library = functions.add_book(library)
+            record = functions.input_data()
+            library = functions.add_book(record, library)
 
         elif choice == "2":
             ch = functions.get_id()
@@ -35,8 +36,9 @@ if __name__ == "__main__":
 
         elif choice == "4":
             # вывод в консоль перечень всех книг
-            for i in range(len(library)):
-                print(library[i].send_record_book(library[i].instance_count))
+            # for i in range(len(library)):
+            #     print(library[i].send_record_book(library[i].instance_count))
+            functions.list_all(library)
 
         elif choice == "5":
             id = functions.get_id()
@@ -54,7 +56,9 @@ if __name__ == "__main__":
                 functions.change_stat(id, library, status)
 
         elif choice == "6":
-            functions.write_data(database_txt, library)
-            print(f"Результат работы сохранен в {database_txt}")
+            functions.write_data(DATABASE_TXT, library)
+            print(f"Результат работы сохранен в {DATABASE_TXT}")
             print(" Спасибо что воспользовались нашим сервисом, до следующих встреч")
             break
+        elif choice == "7":
+            functions.test_add(library)

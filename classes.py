@@ -18,19 +18,22 @@ class Book:
     def change_status(self, id, new_status):
         self.status = new_status
 
+    def get_status(self):
+        return self.status
+
     def send_id(self):
         return self.id
 
     def send_record_book(self, id):
         '''
-         выводит атрибуты  книг с их id, title, author, year и status
+         выводит атрибуты  книг с их id, title, author, year и status для отображения списка книг
         '''
         return (f"id = {self.id}! название: {self.title}! автор {self.author} ! год выпуска {self.year}!"
                 f" статус: {self.status} ")
 
     def send_record_book_wihtout_id(self, id):
         '''
-         выводит атрибуты  книг с их id, title, author, year и status для поиска
+         выводит атрибуты  книг с их id, title, author, year и status для поиска и записи в хранилище
         '''
         return (f"{self.title}~{self.author}~{self.year}~{self.status}\n")
 
